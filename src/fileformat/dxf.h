@@ -1,0 +1,1 @@
+// Simple DXF Stream Class
