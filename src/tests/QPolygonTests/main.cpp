@@ -3,8 +3,10 @@
 #include <QFileDialog>
 #include <QObject>
 #include <QPainter>
+#include <QPainterPath>
 #include <QPen>
 #include <QPolygon>
+#include <QRegion>
 #include <QString>
 #include <QSvgGenerator>
 #include <QTextStream>
@@ -41,10 +43,21 @@ int main(int argc, char *argv[]) {
   QPolygon poly4=poly1.united(poly2);
   QPolygon poly5=poly1.intersected(poly2);
   QPolygon poly6=poly4.subtracted(poly5);
+  QRegion region1=QRegion(poly4);
+  QRegion region2=QRegion(poly5);
+  QRegion region3=region1.subtracted(region2);
+  QPainterPath path1;
+  path1.addPolygon(poly5);
+  QPainterPath path2;
+  path2.addPolygon(poly6);
+  QPainterPath path3;
+  path3=path2.subtracted(path1);
   poly3.translate(50,50);
   poly4.translate(100,50);
   poly5.translate(150,50);
   poly6.translate(50,100);
+  region3.translate(50,150);
+  path3.translate(100,150);
   if (useGUI) {
     // start GUI version
     qDebug() << " GUI Mode\n";
@@ -57,6 +70,7 @@ int main(int argc, char *argv[]) {
     painter.drawPolygon(poly4);
     painter.drawPolygon(poly5);
     painter.drawPolygon(poly6);
+    painter.drawPath(path3);
     painter.end();
   } else {
     // start non-GUI version
