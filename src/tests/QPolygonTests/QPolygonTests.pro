@@ -8,4 +8,5 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
+QT += svg
 SOURCES += main.cpp

@@ -1,8 +1,16 @@
 #include <QApplication>
 #include <QDebug>
+#include <QFileDialog>
+#include <QObject>
+#include <QPainter>
+#include <QPen>
 #include <QPolygon>
 #include <QString>
+#include <QSvgGenerator>
 #include <QTextStream>
+#include <QTranslator>
+#include <QWidget>
+#include <QGridLayout>
 
 int main(int argc, char *argv[]) {
   #ifdef Q_WS_X11
@@ -12,13 +20,47 @@ int main(int argc, char *argv[]) {
   #endif
   QApplication app(argc, argv, useGUI);
   QTextStream stream(stdout);
+  
   qDebug() << "Testing QPolygon\n";
   stream << "Testing QPolygon\n";
- 
+
+  QSvgGenerator generator;
+  generator.setFileName("test.svg");
+  generator.setSize(QSize(200,200));
+  generator.setViewBox(QRect(0,0,200,200));
+  // generator.setTitle(tr("Testing QPolygon"));
+  generator.setTitle("Testing QPolygon");
+  // generator.setDescription(tr("An SVG drawing testing QPolygon operations."));
+  generator.setDescription("An SVG drawing testing QPolygon operations.");
+
+  static const int box1[4][2] = { {5,5},{-5,5},{-5,-5},{5,-5} };
+  static const int box2[4][2] = { {0,0},{10,0},{10,10},{0,10} };
+  QPolygon poly1=QPolygon(4,&box1[0][0]);
+  QPolygon poly2=QPolygon(4,&box2[0][0]);
+  QPolygon poly3=poly1.subtracted(poly2);
+  QPolygon poly4=poly1.united(poly2);
+  QPolygon poly5=poly1.intersected(poly2);
+  QPolygon poly6=poly4.subtracted(poly5);
+  poly3.translate(50,50);
+  poly4.translate(100,50);
+  poly5.translate(150,50);
+  poly6.translate(50,100);
   if (useGUI) {
     // start GUI version
+    qDebug() << " GUI Mode\n";
+    QPainter painter;
+    painter.begin(&generator);
+    painter.setPen(Qt::blue);
+    painter.drawPolygon(poly1);
+    painter.drawPolygon(poly2);
+    painter.drawPolygon(poly3);
+    painter.drawPolygon(poly4);
+    painter.drawPolygon(poly5);
+    painter.drawPolygon(poly6);
+    painter.end();
   } else {
     // start non-GUI version
+    qDebug() << " Non-GUI Mode\n";
   }
   return app.exec();
 }
