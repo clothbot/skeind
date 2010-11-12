@@ -149,6 +149,7 @@ int main(int argc, char *argv[]) {
       QPainterPath partShell=pathCircle.subtracted(shiftPath);
       shellPath=shellPath.united(partShell);
     }
+
     shellPath.translate(20,120);
     shellPath.setFillRule(Qt::OddEvenFill);
     painter.setBrush(Qt::red);
@@ -156,7 +157,14 @@ int main(int argc, char *argv[]) {
       painter.drawPolygon(thisPoly);
     }
 
-    shellPath.translate(40,0);
+    pathCircle.translate(40,120);
+    shellPath.translate(20,0);
+    painter.setBrush(Qt::red);
+    foreach (QPolygonF thisPoly, pathCircle.subtracted(shellPath).toFillPolygons()) {
+      painter.drawPolygon(thisPoly);
+    }
+
+    shellPath.translate(20,0);
     shellPath.setFillRule(Qt::OddEvenFill);
     painter.setBrush(Qt::NoBrush);
     foreach (QPolygonF thisPoly, shellPath.toSubpathPolygons()) {
