@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
     }
 
     QPainterPath pathCircle;
-    pathCircle.addEllipse(0,0,20,20);
+    pathCircle.addEllipse(-10,-10,20,20);
     QPainterPath shellPath;
     qreal shellWidth=2.0;
     int shellCount=8;
@@ -153,6 +153,13 @@ int main(int argc, char *argv[]) {
     shellPath.setFillRule(Qt::OddEvenFill);
     painter.setBrush(Qt::red);
     foreach (QPolygonF thisPoly, shellPath.toFillPolygons()) {
+      painter.drawPolygon(thisPoly);
+    }
+
+    shellPath.translate(40,0);
+    shellPath.setFillRule(Qt::OddEvenFill);
+    painter.setBrush(Qt::NoBrush);
+    foreach (QPolygonF thisPoly, shellPath.toSubpathPolygons()) {
       painter.drawPolygon(thisPoly);
     }
       
