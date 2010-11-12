@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
   QRegion region1=QRegion(poly4);
   QRegion region2=QRegion(poly5);
   QRegion region3=region1.subtracted(region2);
+
   QPainterPath path1;
   path1.addPolygon(poly5);
   QPainterPath path2;
@@ -54,13 +55,16 @@ int main(int argc, char *argv[]) {
   QPainterPath path3;
   path3=path2.subtracted(path1);
   QPainterPath path4=QPainterPath(path3);
-  poly3.translate(50,50);
-  poly4.translate(100,50);
-  poly5.translate(150,50);
-  poly6.translate(50,100);
-  region3.translate(50,150);
-  path3.translate(100,150);
-  path4.translate(150,150);
+  QPainterPath path5=QPainterPath(path3);
+
+  poly3.translate(20,20);
+  poly4.translate(40,20);
+  poly5.translate(60,20);
+  poly6.translate(20,40);
+  region3.translate(40,40);
+  path3.translate(60,40);
+  path4.translate(20,60);
+  path5.translate(40,60);
   if (useGUI) {
     // start GUI version
     qDebug() << " GUI Mode\n";
@@ -69,12 +73,20 @@ int main(int argc, char *argv[]) {
     painter.setPen(Qt::blue);
     painter.drawPolygon(poly1);
     painter.drawPolygon(poly2);
+
     painter.drawPolygon(poly3);
     painter.drawPolygon(poly4);
     painter.drawPolygon(poly5);
+
     painter.drawPolygon(poly6);
     painter.drawPath(path3);
-    foreach (QPolygonF thisPoly, path4.toSubpathPolygons()) {
+
+    foreach (QPolygonF thisPoly, path4.toFillPolygons()) {
+      painter.drawPolygon(thisPoly);
+    }
+
+    path5.setFillRule(Qt::WindingFill);
+    foreach (QPolygonF thisPoly, path5.toSubpathPolygons()) {
       painter.drawPolygon(thisPoly);
     }
     painter.end();
