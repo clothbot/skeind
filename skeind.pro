@@ -16,3 +16,9 @@ HEADERS += src/mesh.h \
            src/fileformat/gdsii.h \
            src/fileformat/stl.h
 SOURCES += src/triangle.cpp src/tests/QPolygonTests/main.cpp
+
+unix {
+	skeind.path = /usr/bin
+	skeind.files = skeind
+	INSTALLS += skeind
+}
