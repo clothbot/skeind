@@ -1,0 +1,104 @@
+Outline of the Object Oriented Structure:
+
+- Mesh
+	- is composed of triangles
+	- sorts triangles from Z- to Z+ order
+		- subsorts triangles from Y- to Y+
+			- subsorts triangles from X- to X+
+	- has a bounding cube
+	- detects degenerate Triangle
+		- zero-area
+	- can be constructed from ModelSlices
+- Triangle
+	- has three Vector3D points
+		- first point is min Z 
+			- subsort to min Y 
+				- subsort to min X
+		- last point is max Z 
+			- subsort to max Y 
+				- subsort to max X
+	- has a normal Vector3D
+	- calculate 2D area
+	- calculate bounding cube
+	- intersect with plane
+- Slice
+	- is a QPainterPath
+	- has properties (read-only direct access)
+		- has a thickness
+		- has a bounding box
+			- local (untransformed)
+		- has a QVector3D position
+		- has a QVector3D orientation
+		- has a QTransform transform
+	- has functions
+		- get2DBBox (transformed 2D bounding box)
+		- get3DBCube (transformed, oriented bounding cube)
+		- setPosition
+		- setOrientation
+		- setTransform
+		- setThickness
+	- has 2D operators
+		- geomOr()
+			- equiv to OpenSCAD union or QPainterPath united()
+			- Slice geomOr(Slice first, QList<Slice> rest)
+			- Slice geomOr(Slice first, Slice rest)
+			- default properties inherited from first.
+		- geomAnd()
+			- equiv to OpenSCAD intersection() or QPainterPath intersected()
+			- Slice geomAnd(Slice first, QList<Slice> rest)
+			- Slice geomAnd(Slice first, Slice rest)
+			- default properties inherited from first.
+		- geomAndNot()
+			- equiv to OpenSCAD difference() or QPainterPath subtracted()
+			- Slice geomAndNot(Slice first, QList<Slice> rest)
+			- Slice geomAndNot(Slice first, Slice rest)
+			- default properties inherited from first.
+		- geomXor()
+			- Slice geomXor(Slice first, QList<Slice> rest)
+			- Slice geomXor(Slice first, Slice rest)
+			- default properties inherited from first.
+		- shell()
+			- Slice shell(qreal wallThickness)
+	- Stream Operators
+		- readGDSII
+		- writeGDSII
+		- readSVG
+		- writeSVG
+		- readDXF
+		- writeDXF
+		- readGCode
+		- writeGCode
+		- readGerber
+		- writeGerber
+
+- Model
+	- is a QList<Slice>
+	- has properties
+		- has a bounding cube
+		- has a Material
+	- has 3D operators
+		- union()
+		- intersection()
+		- difference()
+		- exclusiveor()
+	- has 2.5D operators
+		- generateFillPattern()
+		- generateShell()
+		- generateBridges()
+		- supportOverhangs()
+	- Stream Operators
+		- readSTL
+		- writeSTL
+		- readDAE
+		- writeDAE
+		- readGDSII
+		- writeGDSII
+		- readSVG
+		- writeSVG
+		- readDXF
+		- writeDXF
+		- readGCode
+		- writeGCode
+		- readGerber
+		- writeGerber
+

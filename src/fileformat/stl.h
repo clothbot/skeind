@@ -5,14 +5,15 @@
 #include <QList>
 #include <QString>
 #include <QVector3D>
-#include "Mesh.h"
-#include "Triangles.h"
+#include "../mesh.h"
+#include "../triangle.h"
 
 class STLMesh extends Mesh {
 public:
-  Mesh(QString fileName);
-  ~Mesh();
-  
+  STLMesh(QString fileName);
+  ~STLMesh();
+  boolean LoadBinaryMesh(QString FileName);
+  boolean LoadTextMesh(QString FileName);
 };
 
 #endif

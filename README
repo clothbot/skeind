@@ -1,0 +1,15 @@
+Rough make instructions:
+
+1. Run Qt qmake (QT 4.6 or 4.7 should be fine):
+	qmake
+
+2. Run make on the Makefile qmake makes:
+	make
+
+3. Run the resulting binaries.
+
+
+License:
+
+  Unless otherwise stated, this code is licensed under the GPLv3: http://www.gnu.org/licenses/gpl.html
+

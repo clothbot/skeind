@@ -1,0 +1,9 @@
+Big List of Stuff:
+
+- add support for QTestLib unit tests
+- add support for QScriptEngine
+- read STL files
+- slice model
+- write SVG of slices
+- write gcode of slices
+
