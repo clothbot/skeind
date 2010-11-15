@@ -9,18 +9,25 @@ Outline of the Object Oriented Structure:
 	- detects degenerate Triangle
 		- zero-area
 	- can be constructed from ModelSlices
+- Line3D
+	- is made of two Vector3D points
+	- has a Vector3D absolute start position
+		- allows for 
+	- has a Vector3D end position relative to the start position
 - Triangle
-	- has three Vector3D points
+	- is made of three Vector3D points
 		- first point is min Z 
 			- subsort to min Y 
 				- subsort to min X
 		- last point is max Z 
 			- subsort to max Y 
 				- subsort to max X
-	- has a normal Vector3D
-	- calculate 2D area
-	- calculate bounding cube
-	- intersect with plane
+	- has properties
+		- has a Vector3D normal
+	- has functions
+		- calculate2DArea
+		- Line3D calculate3DBCube
+		- intersectPlane
 - Slice
 	- is a QPainterPath
 	- has properties (read-only direct access)
@@ -30,6 +37,9 @@ Outline of the Object Oriented Structure:
 		- has a QVector3D position
 		- has a QVector3D orientation
 		- has a QTransform transform
+			- resize 2D content
+		- has a gridScaleX, gridScaleY
+			- quantize data for grid-snap, machine limitations, etc.
 	- has functions
 		- get2DBBox (transformed 2D bounding box)
 		- get3DBCube (transformed, oriented bounding cube)
@@ -75,17 +85,47 @@ Outline of the Object Oriented Structure:
 	- is a QList<Slice>
 	- has properties
 		- has a bounding cube
+			- maintained as slices added/removed/changed.
 		- has a Material
-	- has 3D operators
+	- has Pseudo-3D operators
 		- union()
+			- Model union(QList<Model> models)
+			- threaded/multiprocessor execution
+			- thread per slice
 		- intersection()
+			- Model intersection(QList<Model> models)
+			- threaded/multiprocessor execution
+			- thread per slice
 		- difference()
-		- exclusiveor()
+			- Model difference(Model first, QList<Model> rest)
+			- threaded/multiprocessor execution
+			- thread per slice
+		- xor()
+			- Model xor(QList<Model> models)
+			- threaded/multiprocessor execution
+			- thread per slice
 	- has 2.5D operators
 		- generateFillPattern()
+			- threaded/multiprocessor execution
+			- thread per slice
 		- generateShell()
+			- threaded/multiprocessor execution
+			- thread per slice
 		- generateBridges()
+			- threaded/multiprocessor execution
+			- thread per two slices 
+				- slice geometry with no overlap below
+				- straight line support from both sides
+				- no holes mid-bridge.
+		- generateTops()
+			- threaded/multiprocessor execution
+			- thread per two slices 
+				- slice geometry with no overlap above.
 		- supportOverhangs()
+			- threaded/multiprocessor execution
+			- thread per two slices 
+				- slice geometry with no overlap below
+				- not bridge geometry
 	- Stream Operators
 		- readSTL
 		- writeSTL
