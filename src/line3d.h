@@ -7,7 +7,7 @@ class Line3D {
   public:
     Line3D(QVector3D inpt1, QVector3D inpt2);
     ~Line3D();
-    boolean isValid();
+    bool isValid();
     QVector3D& getLBL();
     QVector3D& getUFR();
     QVector3D getPt1();
@@ -19,4 +19,4 @@ class Line3D {
     QVector3D pt2;
 };
 
-#3ndif
+#endif

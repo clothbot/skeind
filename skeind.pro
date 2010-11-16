@@ -11,11 +11,14 @@ INCLUDEPATH += . src
 QT += svg
 HEADERS += src/mesh.h \
            src/triangle.h \
+           src/line3d.h \
            src/fileformat/dae.h \
            src/fileformat/dxf.h \
            src/fileformat/gdsii.h \
            src/fileformat/stl.h
-SOURCES += src/triangle.cpp src/tests/QPolygonTests/main.cpp
+SOURCES += src/triangle.cpp \
+	src/line3d.cpp \
+	src/tests/QPolygonTests/main.cpp
 
 unix {
 	skeind.path = /usr/bin
