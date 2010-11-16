@@ -6,8 +6,6 @@ Outline of the Object Oriented Structure:
 		- subsorts triangles from Y- to Y+
 			- subsorts triangles from X- to X+
 	- has a bounding cube
-	- detects degenerate Triangle
-		- zero-area
 	- can be constructed from ModelSlices
 - Line3D
 	- is made of two Vector3D points
@@ -28,6 +26,8 @@ Outline of the Object Oriented Structure:
 		- calculate2DArea
 		- Line3D calculate3DBCube
 		- intersectPlane
+	- detects degenerate Triangle
+		- zero-area
 - Slice
 	- is a QPainterPath
 	- has properties (read-only direct access)
@@ -51,21 +51,21 @@ Outline of the Object Oriented Structure:
 		- geomOr()
 			- equiv to OpenSCAD union or QPainterPath united()
 			- Slice geomOr(Slice first, QList<Slice> rest)
-			- Slice geomOr(Slice first, Slice rest)
+			- Slice geomOr(Slice first, Slice second)
 			- default properties inherited from first.
 		- geomAnd()
 			- equiv to OpenSCAD intersection() or QPainterPath intersected()
 			- Slice geomAnd(Slice first, QList<Slice> rest)
-			- Slice geomAnd(Slice first, Slice rest)
+			- Slice geomAnd(Slice first, Slice second)
 			- default properties inherited from first.
 		- geomAndNot()
 			- equiv to OpenSCAD difference() or QPainterPath subtracted()
 			- Slice geomAndNot(Slice first, QList<Slice> rest)
-			- Slice geomAndNot(Slice first, Slice rest)
+			- Slice geomAndNot(Slice first, Slice second)
 			- default properties inherited from first.
 		- geomXor()
 			- Slice geomXor(Slice first, QList<Slice> rest)
-			- Slice geomXor(Slice first, Slice rest)
+			- Slice geomXor(Slice first, Slice second)
 			- default properties inherited from first.
 		- shell()
 			- Slice shell(qreal wallThickness)

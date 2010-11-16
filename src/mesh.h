@@ -1,18 +1,24 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include "line3d.h"
+#include "triangle.h"
+#include <QList>
+#include <QVector3D>
+
 class Mesh extends QList<Triangle> {
  public:
   Mesh();
+  Mesh(QList<Triangle> triangles);
+  Mesh(QList<Slice> slices);
   ~Mesh();
-  void setScale(qreal rnum);
-  qreal getScale();
-  QVector3D& getLLB();
-  QVector3D& getURF();
+  QVector3D& getLBL();
+  QVector3D& getUFR();
+  bool add(Triangle tri);
+	// Detect degenerate triangles
+	// Update bounding cube
  private:
-  qreal scale;
-  QVector3D lowerLeftBack;
-  QVector3D upperRightFront;
+  Line3D boundingCube;
 };
 
 #endif
