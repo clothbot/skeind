@@ -18,6 +18,7 @@ HEADERS += src/mesh.h \
            src/fileformat/stl.h
 SOURCES += src/triangle.cpp \
 	src/line3d.cpp \
+	src/mesh.cpp \
 	src/tests/QPolygonTests/main.cpp
 
 unix {

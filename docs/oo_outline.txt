@@ -7,6 +7,15 @@ Outline of the Object Oriented Structure:
 			- subsorts triangles from X- to X+
 	- has a bounding cube
 	- can be constructed from ModelSlices
+		- triangulate bridges, caps and bottoms
+		- geomAndNot(slice+,slice-)
+			- triangulate resulting geometry
+			- map points inside slice+ to z-
+			- map remaining points to z+
+		- geomAndNot(slice-,slice+)
+			- triangulate resulting geometry
+			- map points inside slice- to z+
+			- map remaining points to z-
 - Line3D
 	- is made of two Vector3D points
 	- has a Vector3D absolute start position
