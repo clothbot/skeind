@@ -1,9 +1,13 @@
 #ifndef SLICE_H
 #define SLICE_H
 
+#include <QLine>
 #include <QPainterPath>
+#include <QTransform>
+#include <QVector3D>
+#include "line3d.h"
 
-class Slice extends QPainterPath {
+class Slice : public QPainterPath {
   public:
     Slice();
     ~Slice();
@@ -30,11 +34,11 @@ class Slice extends QPainterPath {
     Slice shell(qreal wallThick);
   private:
     qreal thickness;
+    QVector3D gridScale;
     QLine localBBox;
     QVector3D position;
     QVector3D orientation;
     QTransform transform;
-    QVector2D gridScale;
 };
 
 #endif

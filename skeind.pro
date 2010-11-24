@@ -12,6 +12,7 @@ QT += svg
 HEADERS += src/mesh.h \
            src/triangle.h \
            src/line3d.h \
+           src/slice.h \
            src/fileformat/dae.h \
            src/fileformat/dxf.h \
            src/fileformat/gdsii.h \
@@ -19,6 +20,7 @@ HEADERS += src/mesh.h \
 SOURCES += src/triangle.cpp \
 	src/line3d.cpp \
 	src/mesh.cpp \
+	src/slice.cpp \
 	src/tests/QPolygonTests/main.cpp
 
 unix {
