@@ -50,8 +50,8 @@ Outline of the Object Oriented Structure:
 		- has a gridScaleX, gridScaleY
 			- quantize data for grid-snap, machine limitations, etc.
 	- has functions
-		- get2DBBox (transformed 2D bounding box)
-		- get3DBCube (transformed, oriented bounding cube)
+		- boundingRect (transformed 2D bounding box)
+		- boundingCube (transformed, oriented bounding cube)
 		- setPosition
 		- setOrientation
 		- setTransform

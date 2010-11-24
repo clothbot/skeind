@@ -14,9 +14,31 @@ Slice::Slice() {
   transform.reset();
   gridScale.setX(0.01);
   gridScale.setY(0.01);
-  gridScale.setY(0.05);
+  gridScale.setZ(0.05);
 }
 
 Slice::~Slice() {
+}
+
+QRectF Slice::boundingRect() {
+  QRectF newBR;
+  bool initFlag=false;
+  foreach(QPolygonF thisPoly, toFillPolygons()) {
+    QRectF localBR=thisPoly.boundingRect();
+    if(initFlag) {
+      if( localBR.bottom()<newBR.bottom() )
+	newBR.moveBottom(localBR.bottom());
+      if( localBR.left()<newBR.left() ) 
+	newBR.moveLeft(localBR.left());
+      if( localBR.top()>newBR.top() )
+	newBR.moveTop(localBR.top());
+      if( localBR.right()>newBR.right() )
+	newBR.moveRight(localBR.right());
+    } else {
+      newBR=localBR;
+      initFlag=true;
+    }
+  }
+  return(newBR);
 }
 

@@ -13,6 +13,7 @@ HEADERS += src/mesh.h \
            src/triangle.h \
            src/line3d.h \
            src/slice.h \
+           src/cube3d.h \
            src/fileformat/dae.h \
            src/fileformat/dxf.h \
            src/fileformat/gdsii.h \

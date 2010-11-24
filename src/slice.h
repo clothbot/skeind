@@ -1,18 +1,20 @@
 #ifndef SLICE_H
 #define SLICE_H
 
-#include <QLine>
+#include <QLineF>
+// #include <QList>
 #include <QPainterPath>
-#include <QTransform>
-#include <QVector3D>
-#include "line3d.h"
+#include <QRectF>
+// #include <QTransform>
+// #include <QVector3D>
+#include "cube3d.h"
 
 class Slice : public QPainterPath {
   public:
     Slice();
     ~Slice();
-    QLine calculate2DBBox();
-    Line3D calculate3DBCube();
+    QRectF boundingRect();
+    Cube3D boundingCube();
     bool setPosition(QVector3D newPos);
     bool setOrientation(QVector3D newOrient);
     bool setTransform(QTransform newXF);
@@ -35,7 +37,7 @@ class Slice : public QPainterPath {
   private:
     qreal thickness;
     QVector3D gridScale;
-    QLine localBBox;
+    QLineF localBBox;
     QVector3D position;
     QVector3D orientation;
     QTransform transform;
